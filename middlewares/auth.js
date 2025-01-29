@@ -1,6 +1,6 @@
-import { verifyToken } from "../utils/jsonwebtoken";
+const { verifyToken } = require("../utils/jsonwebtoken");
 
-export const VerifyJwtToken = async (req, res, next) => {
+exports.verifyJwtToken = async (req, res, next) => {
     try {
         const authorization = req.headers.authorization;
 

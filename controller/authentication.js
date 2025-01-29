@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
     if (!unhashPassword) {
       return res.status(400).json({ success: false, message: "Incorrect Password" })
     }
-    let jwtPayload = { id: email }
+    let jwtPayload = { email: email, user_id: user.id }
 
     const token = createToken(jwtPayload)
 
