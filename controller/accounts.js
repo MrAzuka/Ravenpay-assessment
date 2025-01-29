@@ -69,4 +69,18 @@ const generateBankAccount = async (req, res) => {
     }
 };
 
-module.exports = { generateBankAccount };
+const retrieveBankAccount = async (req, res) => {
+    try {
+        const userId = req.body.user.user_id
+        const data = await findBankAccountByUser({ user_id: userId })
+
+        if (!data) {
+            return res.status(404).json({ success: true, message: "Bank account not found." })
+        }
+        return res.status(200).json({ success: true, message: "Bank account fetched.", data: data })
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Error with request: " + error })
+    }
+}
+
+module.exports = { generateBankAccount, retrieveBankAccount };

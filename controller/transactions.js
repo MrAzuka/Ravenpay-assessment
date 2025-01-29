@@ -3,7 +3,7 @@ const qs = require("qs");
 const db = require("../models/db");
 const { triggerWebhook } = require("../models/webhook");
 const {
-    findBankAccountByUserId,
+    findBankAccountByUser,
     updateBankAccount,
 } = require("../models/bank_account");
 const { findTransactionsByUserId, createTransaction } = require("../models/transactions");
@@ -20,7 +20,7 @@ const transferBetweenBanks = async (req, res) => {
         }
 
         // Ensure the user has sufficient balance
-        const userAccount = await findBankAccountByUserId({ user_id: userId });
+        const userAccount = await findBankAccountByUser({ user_id: userId });
         if (!userAccount || userAccount.balance < amount) {
             return res.status(400).json({ status: false, message: "Insufficient balance." })
         }
