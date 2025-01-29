@@ -6,7 +6,6 @@ const agent = new https.Agent({
 });
 
 const triggerWebhook = async ({ event, data }) => {
-  const webhookUrl = process.env.WEBHOOK_URL;
   try {
     const payload = {
       event,
@@ -15,12 +14,12 @@ const triggerWebhook = async ({ event, data }) => {
     };
     const config = {
       method: "post",
-      url: webhookUrl,
+      url: process.env.WEBHOOK_URL,
       headers: {
         "Content-Type": "application/json",
       },
       data: payload,
-      timeout: 50000,
+      timeout: 70000,
       httpsAgent: agent,
     };
     await axios(config);

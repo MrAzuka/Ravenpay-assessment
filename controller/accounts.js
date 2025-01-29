@@ -21,6 +21,9 @@ const generateBankAccount = async (req, res) => {
 
         // Generate a account number using Raven Atlas API
         const { first_name, last_name, phone, email } = req.body;
+        if (!first_name || !last_name || !phone || !email) {
+            return res.status(400).json({ success: false, message: "Missing details" })
+        }
 
         let newAccount;
 
